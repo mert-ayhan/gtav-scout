@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <RootNamespace>GtavScout.Extract</RootNamespace>
+    <AssemblyName>gtav-scout-extract</AssemblyName>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(CodeWalkerPath)' == ''">
+    <CodeWalkerPath>$(CODEWALKER_PATH)</CodeWalkerPath>
+  </PropertyGroup>
+
+  <Target Name="CheckCodeWalkerPath" BeforeTargets="PrepareForBuild">
+    <Error Condition="'$(CodeWalkerPath)' == ''"
+           Text="Set the CODEWALKER_PATH environment variable to a CodeWalker checkout. CodeWalker is not bundled with this repository." />
+    <Error Condition="!Exists('$(CodeWalkerPath)/CodeWalker.Core/CodeWalker.Core.csproj')"
+           Text="No CodeWalker.Core project under CODEWALKER_PATH=$(CodeWalkerPath)." />
+  </Target>
+
+  <ItemGroup>
+    <None Update="shader-names.txt" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(CodeWalkerPath)/CodeWalker.Core/CodeWalker.Core.csproj" />
+  </ItemGroup>
+
+</Project>

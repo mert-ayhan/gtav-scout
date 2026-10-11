@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gtav-asset-search"
+version = "0.1.0a1"
+description = "Local evidence-backed GTA V asset discovery for humans and AI agents — early alpha"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+dependencies = ["Pillow>=10,<13", "numpy>=1.26,<3"]
+
+[project.optional-dependencies]
+semantic = ["sentence-transformers==6.0.1"]
+
+[project.scripts]
+gtav-catalog = "asset_catalog:main"
+gtav-catalog-sources = "asset_catalog_sources:main"
+gtav-catalog-visual = "asset_catalog_visual:main"
+gtav-catalog-semantic = "asset_catalog_semantic:main"
+gtav-catalog-shortlist = "asset_catalog_shortlist:main"
+gtav-catalog-revision = "asset_catalog_revision:main"
+
+[tool.setuptools]
+package-dir = {"" = "scripts"}
+py-modules = ["asset_catalog", "asset_catalog_sources", "asset_catalog_visual", "asset_catalog_semantic", "asset_catalog_shortlist", "asset_catalog_revision", "asset_catalog_campaign", "asset_catalog_transfer_pixels", "asset_catalog_image_signal", "asset_catalog_dedupe_cache"]
